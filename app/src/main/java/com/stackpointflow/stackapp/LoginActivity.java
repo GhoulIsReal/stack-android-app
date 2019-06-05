@@ -1,20 +1,20 @@
 package com.stackpointflow.stackapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-
 import android.widget.Toast;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     public String getMacAddress() {
         WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -27,17 +27,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final Button button = findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_login);
+
+        final Button button2 = findViewById(R.id.button1);
+        button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                openAddQuestionActivity();
+                new RequestAsync1().execute();
             }
         });
-        new RequestAsync().execute();
     }
 
-    public class RequestAsync extends AsyncTask<String,String,String> {
+    public class RequestAsync1 extends AsyncTask<String,String,String> {
         @Override
         protected String doInBackground(String... strings) {
             try {
@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
                 //return RequestHandler.sendGet("https://prodevsblog.com/android_get.php");
 
                 // POST Request
+                EditText et = (EditText) findViewById(R.id.editText1);
                 JSONObject postDataParams = new JSONObject();
-                postDataParams.put("mac_address", getMacAddress() + "5");
-                //postDataParams.put("username", "newphone1");
+                postDataParams.put("mac_address",  getMacAddress());
+                postDataParams.put("username", et.getText());
 
-                return RequestHandler.sendPost("http://192.168.0.195:3001/auth",postDataParams);
+                return RequestHandler.sendPost("http://192.168.0.195:3001/register",postDataParams);
             }
             catch(Exception e){
                 return new String("Exception: " + e.getMessage());
@@ -58,29 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            TextView t1 = (TextView) findViewById(R.id.mac_text);
+            TextView t2 = (TextView) findViewById(R.id.tv2);
 
             if(s!=null){
+                //success
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-                t1.setText(s);
             } else {
-                //t1.setText("Need to set username");
-                //openLoginActivity();
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
-                t1.setText(s);
+                //handle bad request
             }
         }
 
 
-    }
-
-    public void openLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void openAddQuestionActivity() {
-        Intent intent = new Intent(this, AddQuestionActivity.class);
-        startActivity(intent);
     }
 }

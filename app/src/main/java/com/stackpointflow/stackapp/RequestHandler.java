@@ -53,7 +53,7 @@ public class RequestHandler {
         con.setRequestMethod("GET");
         int responseCode = con.getResponseCode();
         System.out.println("Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK /*|| responseCode == HttpURLConnection.HTTP_BAD_REQUEST*/) { // connection ok
+        if (responseCode == HttpURLConnection.HTTP_OK) { // connection ok
             BufferedReader in = new BufferedReader(new InputStreamReader( con.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
