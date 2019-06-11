@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                openAddQuestionActivity();
+                openQuestionListActivity();
             }
         });
         new RequestAsync().execute();
@@ -81,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAddQuestionActivity() {
         Intent intent = new Intent(this, AddQuestionActivity.class);
+        startActivity(intent);
+    }
+
+    public void openQuestionListActivity() {
+        Intent intent = new Intent(this, QuestionListActivity.class);
         startActivity(intent);
     }
 }
