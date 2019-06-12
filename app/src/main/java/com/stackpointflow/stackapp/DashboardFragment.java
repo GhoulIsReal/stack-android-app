@@ -1,5 +1,6 @@
 package com.stackpointflow.stackapp;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,12 +25,9 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         questionsList = new ArrayList<>();
-        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
-        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
-        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
-        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
-        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
-        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
+//        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
+
+        new RequestAsync3().execute();
 
         return inflater.inflate(R.layout.fragment_dashboard, null);
     }
@@ -41,5 +43,43 @@ public class DashboardFragment extends Fragment {
 
         QuestionAdapter qa = new QuestionAdapter(getContext(), questionsList);
         recyclerView.setAdapter(qa);
+    }
+
+    public class RequestAsync3 extends AsyncTask<String,String,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                //GET Request
+                return RequestHandler.sendGet("http://192.168.0.195:3001/questions");
+            }
+            catch(Exception e){
+                return new String("Exception: " + e.getMessage());
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(s!=null){
+                //success
+                JSONArray questionsList1 = null;
+                try {
+                    questionsList1 = new JSONArray(s);
+                    for (int i = 0; i < questionsList1.length(); i++) {
+                        JSONObject question = questionsList1.getJSONObject(i);
+                        questionsList.add(new ModelQuestion(question.getString("title"),
+                                                            question.getString("question_text"),
+                                                            question.getString("username"),
+                                                            question.getString("published_date")));
+                    }
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                //handle bad request
+            }
+        }
+
+
     }
 }
