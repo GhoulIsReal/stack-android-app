@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +24,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         questionsList = new ArrayList<>();
-//        questionsList.add(new ModelQuestion("Title1", "Who knows...", "Matumba", "Jun 6"));
+//        questionsList.add(new ModelQuestion("1", "Title1", "Who knows...", "Matumba", "Jun 6"));
 
         new RequestAsync3().execute();
 
@@ -66,7 +65,8 @@ public class DashboardFragment extends Fragment {
                     questionsList1 = new JSONArray(s);
                     for (int i = 0; i < questionsList1.length(); i++) {
                         JSONObject question = questionsList1.getJSONObject(i);
-                        questionsList.add(new ModelQuestion(question.getString("title"),
+                        questionsList.add(new ModelQuestion(question.getString("question_primary_id"),
+                                                            question.getString("title"),
                                                             question.getString("question_text"),
                                                             question.getString("username"),
                                                             question.getString("published_date")));

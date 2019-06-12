@@ -75,7 +75,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    new RequestAsync4().execute("" + getAdapterPosition());
+                    new RequestAsync4().execute(sList.get(getAdapterPosition()).getQuestion_id());
                 }
             });
         }
