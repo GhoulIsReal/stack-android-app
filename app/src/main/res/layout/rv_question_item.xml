@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:layout_margin="10dp"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             android:layout_height="110dp">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/constraitLayout">
+
+
+        <TextView
+                android:text="Question Title"
+                android:layout_width="226dp"
+                android:layout_height="19dp" android:id="@+id/questionTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+        />
+        <TextView
+                android:text="Question text"
+                android:layout_width="251dp"
+                android:layout_height="40dp" android:id="@+id/questionText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/questionTitle"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"/>
+        <TextView
+                android:text="Username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/usernameText"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/questionTitle"
+                android:layout_marginStart="8dp"/>
+        <TextView
+                android:text="Today"
+                android:layout_width="0dp"
+                android:layout_height="24dp" android:id="@+id/postedTime"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/questionText"
+                android:layout_marginStart="8dp"/>
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

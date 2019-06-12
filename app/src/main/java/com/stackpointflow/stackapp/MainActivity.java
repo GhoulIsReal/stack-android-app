@@ -80,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openAddQuestionActivity() {
-        Intent intent = new Intent(this, AddQuestionActivity.class);
-        startActivity(intent);
-    }
-
     public void openQuestionListActivity() {
         Intent intent = new Intent(this, QuestionListActivity.class);
         startActivity(intent);
