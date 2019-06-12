@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                openQuestionListActivity();
+                //openQuestionListActivity();
+                openBottomNavigationActivity();
             }
         });
         new RequestAsync().execute();
@@ -86,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openQuestionListActivity() {
         Intent intent = new Intent(this, QuestionListActivity.class);
+        startActivity(intent);
+    }
+
+    public void openBottomNavigationActivity() {
+        Intent intent = new Intent(this, BottomNavigationActivity.class);
         startActivity(intent);
     }
 }
