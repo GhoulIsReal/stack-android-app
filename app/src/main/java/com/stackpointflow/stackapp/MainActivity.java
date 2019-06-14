@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //openQuestionListActivity();
-                //openBottomNavigationActivity();
-                openQuestionAnswersActivity();
+                openBottomNavigationActivity();
+                //openQuestionAnswersActivity();
             }
         });
     }
@@ -45,8 +45,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openQuestionAnswersActivity() {
+    public  void openQuestionAnswersActivity() {
         Intent intent = new Intent(this, QuestionAnswerActivity.class);
         startActivity(intent);
+    }
+
+    public static Context getContext() {
+        return getContext();
     }
 }

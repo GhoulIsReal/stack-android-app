@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,10 +19,15 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_answer);
 
-        answersList = new ArrayList<>();
-        answersList.add(new ModelAnswer("1", "3", "1", "Dmitri", "well done", "2"));
-        answersList.add(new ModelAnswer("1", "3", "1", "Dmitri", "well done", "5"));
-        answersList.add(new ModelAnswer("1", "3", "1", "Dmitri", "well done", "3"));
+        answersList = getIntent().getParcelableArrayListExtra("DATA_LIST");
+        String title = getIntent().getStringExtra("Title");
+        String textBody = getIntent().getStringExtra("Body");
+
+        TextView titleHolder = findViewById(R.id.answers_title);
+        TextView bodyHolder = findViewById(R.id.answers_questionBody);
+
+        titleHolder.setText(title);
+        bodyHolder.setText(textBody);
 
         recyclerView = findViewById(R.id.rw_for_answers);
 
@@ -30,5 +38,14 @@ public class QuestionAnswerActivity extends AppCompatActivity {
 
         AnswersAdapter aa = new AnswersAdapter(this, answersList);
         recyclerView.setAdapter(aa);
+
+        Button backButton = findViewById(R.id.back_to_dashboard);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                finish();
+            }
+        });
     }
+
+
 }

@@ -23,7 +23,7 @@ public class QuestionListActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 //GET Request
-                return RequestHandler.sendGet("http://10.0.103.133:3001/questions");
+                return RequestHandler.sendGet("http://192.168.0.195:3001/questions");
             }
             catch(Exception e){
                 return new String("Exception: " + e.getMessage());

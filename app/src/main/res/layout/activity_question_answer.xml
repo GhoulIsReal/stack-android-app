@@ -47,16 +47,16 @@
                             android:text="Question Title"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:id="@+id/textView2"/>
+                            android:layout_height="wrap_content" android:id="@+id/answers_title"/>
 
                     <TextView
-                            android:id="@+id/question"
+                            android:id="@+id/answers_questionBody"
                             android:layout_width="fill_parent"
                             android:layout_height="match_parent"
                             android:lines="8"
                             android:scrollHorizontally="false"
                             android:scrollbars="vertical"
-                            android:textSize="15sp" android:layout_below="@+id/textView2"
+                            android:textSize="15sp" android:layout_below="@+id/answers_title"
                             android:layout_alignParentStart="true"
                             android:text=" Question itself \n Question itself \n Question itself \n Question itself \n Question itself \n Question itself \n Question itself \n"/>
                 </RelativeLayout>

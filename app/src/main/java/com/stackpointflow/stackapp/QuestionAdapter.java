@@ -1,6 +1,7 @@
 package com.stackpointflow.stackapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -19,6 +22,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private Context mContext;
     private ArrayList<ModelQuestion> sList;
+    private String questionTitleForAnswersActivity = "";
+    private String questionBodyForAnswersActivity = "";
     QuestionAdapter(Context context, ArrayList<ModelQuestion> list) {
         mContext = context;
         sList = list;
@@ -75,7 +80,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    new RequestAsync4().execute(sList.get(getAdapterPosition()).getQuestion_id());
+                    String id = sList.get(getAdapterPosition()).getQuestion_id();
+                    questionTitleForAnswersActivity = sList.get(getAdapterPosition()).getQuestion_title();
+                    questionBodyForAnswersActivity = sList.get(getAdapterPosition()).getQuestion_text();
+                    new RequestAsync4().execute(id);
                 }
             });
         }
@@ -87,7 +95,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         protected String doInBackground(String... strings) {
             try {
                 //GET Request
-                return RequestHandler.sendGet("http://10.0.103.133:3001/questions/" + strings[0] + "/answers");
+                return RequestHandler.sendGet("http://192.168.0.195:3001/questions/" + strings[0] + "/answers");
 
             }
             catch(Exception e){
@@ -100,11 +108,36 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
             if(s!=null){
                 Log.e("lo", s);
+                JSONArray answersList1 = null;
+                ArrayList<ModelAnswer> answersListForIntent = new ArrayList<>();
+                try {
+                    answersList1 = new JSONArray(s);
+                    for (int i = 0; i < answersList1.length(); i++) {
+                        JSONObject answer = answersList1.getJSONObject(i);
+                        answersListForIntent.add(new ModelAnswer(answer.getString("id"),
+                                                                answer.getString("question_id"),
+                                                                answer.getString("user_id"),
+                                                                answer.getString("username"),
+                                                                answer.getString("answer_text"),
+                                                                answer.getString("tips_count")));
+                    }
+                    openQuestionAnswersActivity(answersListForIntent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
 
             }
         }
 
 
+    }
+
+    public void openQuestionAnswersActivity(ArrayList<ModelAnswer> answersList) {
+        Intent intent = new Intent(mContext, QuestionAnswerActivity.class);
+        intent.putExtra("DATA_LIST", answersList);
+        intent.putExtra("Title", questionTitleForAnswersActivity);
+        intent.putExtra("Body", questionBodyForAnswersActivity);
+        mContext.startActivity(intent);
     }
 }
