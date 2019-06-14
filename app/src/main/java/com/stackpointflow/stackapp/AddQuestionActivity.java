@@ -42,7 +42,7 @@ public class AddQuestionActivity extends AppCompatActivity {
                 postDataParams.put("title", et1.getText());
                 postDataParams.put("question_text", et2.getText());
 
-                return RequestHandler.sendPost("http://192.168.0.195:3001/add-question",postDataParams);
+                return RequestHandler.sendPost("http://10.0.103.133:3001/add-question",postDataParams);
             }
             catch(Exception e){
                 return new String("Exception: " + e.getMessage());

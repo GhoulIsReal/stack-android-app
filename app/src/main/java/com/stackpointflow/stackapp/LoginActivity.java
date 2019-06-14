@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 postDataParams.put("mac_address",  getMacAddress());
                 postDataParams.put("username", et.getText());
 
-                return RequestHandler.sendPost("http://192.168.0.195:3001/register",postDataParams);
+                return RequestHandler.sendPost("http://10.0.103.133:3001/register",postDataParams);
             }
             catch(Exception e){
                 return new String("Exception: " + e.getMessage());

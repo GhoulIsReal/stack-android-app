@@ -87,7 +87,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         protected String doInBackground(String... strings) {
             try {
                 //GET Request
-                return RequestHandler.sendGet("http://192.168.0.195:3001/questions/" + strings[0] + "/answers");
+                return RequestHandler.sendGet("http://10.0.103.133:3001/questions/" + strings[0] + "/answers");
 
             }
             catch(Exception e){

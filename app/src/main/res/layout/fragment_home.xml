@@ -43,7 +43,7 @@
             android:drawableLeft="@drawable/plus_icon"
             android:textColor="#fefffd"
             android:layout_width="135dp"
-            android:layout_height="0dp"
+            android:layout_height="40dp"
             android:id="@+id/addQuestionButton" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
             android:layout_marginStart="8dp" android:layout_marginBottom="212dp"

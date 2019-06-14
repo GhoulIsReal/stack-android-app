@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
                 postDataParams.put("mac_address", getMacAddress());
                 //postDataParams.put("username", "newphone1");
 
-                return RequestHandler.sendPost("http://192.168.0.195:3001/auth",postDataParams);
+                return RequestHandler.sendPost("http://10.0.103.133:3001/auth",postDataParams);
             }
             catch(Exception e){
                 return new String("Exception: " + e.getMessage());
@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
                     e.printStackTrace();
                 }
             } else {
-
+                    openLoginActivity();
             }
         }
 
@@ -86,6 +86,11 @@ public class HomeFragment extends Fragment {
 
     public void openAddQuestionActivity() {
         Intent intent = new Intent(getContext(), AddQuestionActivity.class);
+        startActivity(intent);
+    }
+
+    public void openLoginActivity() {
+        Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
     }
 }
