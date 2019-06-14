@@ -19,31 +19,16 @@ public class ModelQuestion {
         return question_title;
     }
 
-    public void setQuestion_title(String question_title) {
-        this.question_title = question_title;
-    }
-
     public String getQuestion_text() {
         return question_text;
-    }
-
-    public void setQuestion_text(String question_text) {
-        this.question_text = question_text;
     }
 
     public String getUsername_text() {
         return username_text;
     }
 
-    public void setUsername_text(String username_text) {
-        this.username_text = username_text;
-    }
-
     public String getTime_posted_text() {
         return time_posted_text;
     }
 
-    public void setTime_posted_text(String time_posted_text) {
-        this.time_posted_text = time_posted_text;
-    }
 }
