@@ -59,7 +59,7 @@
                 android:id="@+id/buttonTip"
                 app:layout_constraintEnd_toStartOf="@+id/tipsCounter"
                 app:layout_constraintTop_toTopOf="@+id/tipsCounter" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="274dp" app:layout_constraintBottom_toBottomOf="@+id/tipsCounter"
+                android:layout_marginStart="250dp" app:layout_constraintBottom_toBottomOf="@+id/tipsCounter"
                 android:layout_marginEnd="11dp"/>
     </android.support.constraint.ConstraintLayout>
 
