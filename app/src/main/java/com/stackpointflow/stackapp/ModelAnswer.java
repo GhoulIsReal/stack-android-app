@@ -29,6 +29,10 @@ public class ModelAnswer implements Parcelable {
         return tipsQuantity;
     }
 
+    public void setTipsQuantity(String tipsQuantity) {
+        this.tipsQuantity = tipsQuantity;
+    }
+
     public String getAnswerID() {
         return answerID;
     }
