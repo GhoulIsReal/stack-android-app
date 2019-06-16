@@ -73,10 +73,21 @@
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/textView3"/>
+                    <TextView
+                            android:background="@drawable/jdun"
+                            android:visibility="gone"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:text=""
+                            android:textColor="#f00"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:layout_width="160dp"
+                            android:layout_height="154dp"
+                            android:layout_below="@+id/textView3" android:id="@+id/no_answers_text"/>
                     <android.support.v7.widget.RecyclerView
                             android:id="@+id/rw_for_answers"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" android:layout_below="@+id/textView3"
+                            android:layout_height="match_parent" android:layout_below="@+id/no_answers_text"
                             android:layout_alignParentStart="true"></android.support.v7.widget.RecyclerView>
                 </RelativeLayout>
             </android.support.constraint.ConstraintLayout>

@@ -23,6 +23,11 @@ public class QuestionAnswerActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("Title");
         String textBody = getIntent().getStringExtra("Body");
 
+        if(answersList.isEmpty()) {
+            TextView noAnswersText = findViewById(R.id.no_answers_text);
+            noAnswersText.setVisibility(View.VISIBLE);
+        }
+
         TextView titleHolder = findViewById(R.id.answers_title);
         TextView bodyHolder = findViewById(R.id.answers_questionBody);
 
