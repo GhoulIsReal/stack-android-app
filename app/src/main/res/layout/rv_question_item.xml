@@ -21,7 +21,8 @@
         <TextView
                 android:text="Question text"
                 android:layout_width="251dp"
-                android:layout_height="40dp" android:id="@+id/questionText"
+                android:minHeight="40dp"
+                android:layout_height="wrap_content" android:id="@+id/questionText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/questionTitle"
                 android:layout_marginStart="8dp"

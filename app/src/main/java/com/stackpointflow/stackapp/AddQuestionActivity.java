@@ -1,5 +1,6 @@
 package com.stackpointflow.stackapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AddQuestionActivity extends AppCompatActivity {
 
+    private String questionTitleForAnswersActivity = "";
+    private String questionBodyForAnswersActivity = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +28,22 @@ public class AddQuestionActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new RequestAsync2().execute();
+            }
+        });
+
+        final Button back_to_home = findViewById(R.id.back_to_home);
+        setActionFinishOnButton(back_to_home);
+
+        final Button cancel_add_question = findViewById(R.id.cancelAddQuestionButton);
+        setActionFinishOnButton(cancel_add_question);
+
+    }
+
+    public void setActionFinishOnButton(Button b) {
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -52,6 +75,17 @@ public class AddQuestionActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             if(s!=null){
                 //success
+                JSONArray ja = null;
+                try {
+                    ja = new JSONArray(s);
+                    JSONObject question =ja.getJSONObject(0);
+                    questionTitleForAnswersActivity = question.getString("title");
+                    questionBodyForAnswersActivity = question.getString("question_text");
+                    openQuestionAnswersActivity(new ArrayList<ModelAnswer>());
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
             } else {
                 //handle bad request
@@ -59,5 +93,13 @@ public class AddQuestionActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void openQuestionAnswersActivity(ArrayList<ModelAnswer> answersList) {
+        Intent intent = new Intent(this, QuestionAnswerActivity.class);
+        intent.putExtra("DATA_LIST", answersList);
+        intent.putExtra("Title", questionTitleForAnswersActivity);
+        intent.putExtra("Body", questionBodyForAnswersActivity);
+        startActivity(intent);
     }
 }
