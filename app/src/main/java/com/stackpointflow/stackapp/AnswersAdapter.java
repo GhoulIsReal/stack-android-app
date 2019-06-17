@@ -114,6 +114,7 @@ public class AnswersAdapter extends RecyclerView.Adapter<AnswersAdapter.ViewHold
                 }
             } else {
                 //handle bad request
+                Toast.makeText(mContext, "You can't tip yourself, bastard!", Toast.LENGTH_LONG).show();
             }
         }
 

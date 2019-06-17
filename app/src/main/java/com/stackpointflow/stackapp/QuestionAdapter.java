@@ -24,6 +24,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private ArrayList<ModelQuestion> sList;
     private String questionTitleForAnswersActivity = "";
     private String questionBodyForAnswersActivity = "";
+    private String questionIDForAnswersActivity = "";
     QuestionAdapter(Context context, ArrayList<ModelQuestion> list) {
         mContext = context;
         sList = list;
@@ -81,6 +82,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     String id = sList.get(getAdapterPosition()).getQuestion_id();
+                    questionIDForAnswersActivity = sList.get(getAdapterPosition()).getQuestion_id();
                     questionTitleForAnswersActivity = sList.get(getAdapterPosition()).getQuestion_title();
                     questionBodyForAnswersActivity = sList.get(getAdapterPosition()).getQuestion_text();
                     new RequestAsync4().execute(id);
@@ -138,6 +140,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         intent.putExtra("DATA_LIST", answersList);
         intent.putExtra("Title", questionTitleForAnswersActivity);
         intent.putExtra("Body", questionBodyForAnswersActivity);
+        intent.putExtra("Question_id", questionIDForAnswersActivity);
         mContext.startActivity(intent);
     }
 }

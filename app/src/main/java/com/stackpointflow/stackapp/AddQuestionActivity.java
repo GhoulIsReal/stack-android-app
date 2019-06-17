@@ -19,6 +19,7 @@ public class AddQuestionActivity extends AppCompatActivity {
 
     private String questionTitleForAnswersActivity = "";
     private String questionBodyForAnswersActivity = "";
+    private String questionIDForAnswersActivity = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,14 +82,16 @@ public class AddQuestionActivity extends AppCompatActivity {
                     JSONObject question =ja.getJSONObject(0);
                     questionTitleForAnswersActivity = question.getString("title");
                     questionBodyForAnswersActivity = question.getString("question_text");
+                    questionIDForAnswersActivity = question.getString("question_primary_id");
+
                     openQuestionAnswersActivity(new ArrayList<ModelAnswer>());
                     finish();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
             } else {
                 //handle bad request
+                Toast.makeText(getApplicationContext(), "Please, fill in all fields!", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -100,6 +103,7 @@ public class AddQuestionActivity extends AppCompatActivity {
         intent.putExtra("DATA_LIST", answersList);
         intent.putExtra("Title", questionTitleForAnswersActivity);
         intent.putExtra("Body", questionBodyForAnswersActivity);
+        intent.putExtra("Question_id", questionIDForAnswersActivity);
         startActivity(intent);
     }
 }
